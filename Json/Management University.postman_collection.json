@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "91f4d4b9-de06-40d8-b670-c13cf1f7e26d",
+		"name": "Management University",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26685604"
+	},
+	"item": [
+		{
+			"name": "Majors",
+			"item": [
+				{
+					"name": "View Majors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/majors"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Major",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Teknik Informatika\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/majors"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Major",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Teknik\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/majors/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete Major",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "View Subjects",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add Subject",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subject",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete Subject",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Add Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"codeMajor\": \"11\",\r\n        \"name\": \"Deisfansha\",\r\n        \"gender\": \"Putra\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/students"
+					},
+					"response": []
+				},
+				{
+					"name": "View Students",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"codeMajor\": \"11\",\r\n        \"name\": \"Deisfansha\",\r\n        \"gender\": \"Laki-Laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/students/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete Student",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/students/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "View Courses",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add Course",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"npm\": 110001,\r\n        \"codeSubject\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/courses"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/courses/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course Grade",
+			"item": [
+				{
+					"name": "View Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/course-grades"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Grade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/course-grades"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course Grade",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "http://localhost:8080/course-grades/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Delete Course Grade",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/course-grades/1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
