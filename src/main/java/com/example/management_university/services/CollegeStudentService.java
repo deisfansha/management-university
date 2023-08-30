@@ -11,13 +11,10 @@ import java.util.List;
 public class CollegeStudentService {
     @Autowired
     private MajorService majorService;
-    private List<CollegeStudentModel> studentDB;
+    private static List<CollegeStudentModel> studentDB = new ArrayList<>();
     private int lastStudent = 0;
     private Response message = new Response();
 
-    public CollegeStudentService() {
-        studentDB = new ArrayList<>();
-    }
 
     public Response getMessage() {
         return message;

@@ -41,4 +41,29 @@ public class CourseGradeController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updateData(@PathVariable ("id") int id, @RequestBody CourseGradeModel grade){
+        boolean edited = courseGradeService.updateCourseGrade(id, grade);
+        if (edited){
+            response = new ResponseModel(courseGradeService.getMessage().responseMessage(), grade);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        }else {
+            response = new ResponseModel(courseGradeService.getMessage().responseMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity softDelete(@PathVariable("id") int id){
+        boolean deleted = courseGradeService.softDeleteCourseGrade(id);
+        if (deleted){
+            response = new ResponseModel(courseGradeService.getMessage().responseMessage(), courseGradeService.getMessage().responseObject());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } else {
+            response = new ResponseModel(courseGradeService.getMessage().responseMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 }

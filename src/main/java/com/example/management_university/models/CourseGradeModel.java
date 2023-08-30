@@ -4,18 +4,16 @@ public class CourseGradeModel {
     private String idGrade;
     private String codeCourse;
     private Quiz quiz;
-    private char gradeQuiz;
     private Exam exam;
-    private char gradeExam;
+    private char gradeScore;
     private boolean isDelete;
 
-    public CourseGradeModel(String idGrade, String codeCourse, Quiz quiz, char gradeQuiz, Exam exam, char gradeExam) {
+    public CourseGradeModel(String idGrade, String codeCourse, Quiz quiz, Exam exam, char gradeScore) {
         this.idGrade = idGrade;
         this.codeCourse = codeCourse;
         this.quiz = quiz;
-        this.gradeQuiz = gradeQuiz;
         this.exam = exam;
-        this.gradeExam = gradeExam;
+        this.gradeScore = gradeScore;
         this.isDelete = false;
     }
 
@@ -43,20 +41,12 @@ public class CourseGradeModel {
         this.quiz = quiz;
     }
 
-    public char getGradeQuiz() {
-        return gradeQuiz;
+    public char getGradeScore() {
+        return gradeScore;
     }
 
-    public void setGradeQuiz(char gradeQuiz) {
-        this.gradeQuiz = gradeQuiz;
-    }
-
-    public char getGradeExam() {
-        return gradeExam;
-    }
-
-    public void setGradeExam(char gradeExam) {
-        this.gradeExam = gradeExam;
+    public void setGradeScore(char gradeScore) {
+        this.gradeScore = gradeScore;
     }
 
     public Exam getExam() {
