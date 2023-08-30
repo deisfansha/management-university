@@ -4,8 +4,9 @@ public class Exam {
     private byte exam1;
     private byte exam2;
 
-    public Exam(byte exam1) {
+    public Exam(byte exam1, byte exam2) {
         this.exam1 = exam1;
+        this.exam2 = exam2;
     }
 
     public byte getExam1() {

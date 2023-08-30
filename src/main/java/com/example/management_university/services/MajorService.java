@@ -40,7 +40,7 @@ public class MajorService {
     public boolean updateMajor(int id, MajorModel major){
         MajorModel existingId = getMajorById(id);
 
-        System.out.println(existingId);
+
         if (existingId == null){
             message.setError("Major Not Found");
             return false;
@@ -74,6 +74,7 @@ public class MajorService {
     }
 
     public List<MajorModel> viewAll(){
+        seedData();
         List<MajorModel> majorView = new ArrayList<>();
         for (MajorModel major :majorDB){
             if (major.isDelete() == false){
@@ -94,7 +95,6 @@ public class MajorService {
     public MajorModel getMajorById(int id){
         for (MajorModel major : majorDB){
             if (major.getIdMajor() == id && !major.isDelete()){
-                System.out.println(major);
                 return major;
             }
         }
@@ -120,6 +120,13 @@ public class MajorService {
             return false;
         }
         return true;
+    }
+
+    public void seedData(){
+        if (majorDB.size()==0){
+            MajorModel major = new MajorModel(11, "Teknik Informatika", false);
+            majorDB.add(major);
+        }
     }
 
     public int generateId(){

@@ -14,7 +14,7 @@ public class CourseGradeService {
     @Autowired
     private CourseService courseService;
     private Response message = new Response();
-    private int id;
+    private int id = 0;
     public Response getMessage() {
         return message;
     }
@@ -25,13 +25,14 @@ public class CourseGradeService {
 
     public boolean addCourseGrade(CourseGradeModel grade){
         CourseModel existingId = courseService.getCourseByid(grade.getCodeCourse());
-
+//        message.setError("Halo");
+//        return false;
         if (existingId == null){
             message.setError("Course Not Found");
             return false;
         }
 
-        if (validateCourseGrade(grade.getCodeCourse(), grade.getQuiz().getQuiz1(), grade.getQuiz().getQuiz2(), grade.getQuiz().getQuiz3(), grade.getQuiz().getQuiz4(), grade.getQuiz().getQuiz5(), grade)){
+        if (!validateCourseGrade(grade.getCodeCourse(), grade.getQuiz().getQuiz1(), grade.getQuiz().getQuiz2(), grade.getQuiz().getQuiz3(), grade.getQuiz().getQuiz4(), grade.getQuiz().getQuiz5(), grade)){
             return false;
         }
 
@@ -58,14 +59,20 @@ public class CourseGradeService {
         }
         double avgExam = totalExam/examScores.size();
 
-//        List<Byte> examScores = new ArrayList<>();
-//        quizScores.add(grade.getExam().);
-//        quizScores.add(grade.getQuiz().getQuiz2());
-
         CourseGradeModel dataGrade = new CourseGradeModel(String.valueOf(generateId()), grade.getCodeCourse(), (Quiz) quizScores, calculategrade(avgQuiz), (Exam) examScores, calculategrade(avgExam));
         courseGradeDB.add(dataGrade);
         message.setResponse("Major saved successfully ", dataGrade);
         return true;
+    }
+
+    public List<CourseGradeModel> viewAll(){
+        List<CourseGradeModel> courseView = new ArrayList<>();
+        for (CourseGradeModel grade : courseGradeDB){
+            if (!grade.isDelete()){
+                courseView.add(grade);
+            }
+        }
+        return courseView;
     }
 
     public boolean validateCourseGrade(String idCourse, byte q1, byte q2, byte q3, byte q4, byte q5, CourseGradeModel grade){
@@ -73,7 +80,7 @@ public class CourseGradeService {
             message.setError("Data Must Be Filled In");
             return false;
         }
-        if (!idCourse.matches("^([0-9])$")){
+        if (idCourse.matches("^([0-9])$")){
             message.setError("Id Course Can only input the number");
             return false;
         }
@@ -84,10 +91,6 @@ public class CourseGradeService {
         return true;
     }
 
-    public int generateId(){
-        id++;
-        return id;
-    }
 
     public char calculategrade(double avg){
         char gradeScore = 0;
@@ -103,6 +106,10 @@ public class CourseGradeService {
             gradeScore = 'E';
         }
         return gradeScore;
+    }
+    public int generateId(){
+        id++;
+        return id;
     }
 
 }

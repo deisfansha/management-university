@@ -28,11 +28,6 @@ public class CollegeStudentService {
         String genderStudent = students.getGender().trim();
         int codeMajor = Integer.parseInt(students.getCodeMajor());
 
-        if (getStudentByName(nameStudent) != null && getStudentByName(String.valueOf(codeMajor)) != null){
-            message.setError("Data Is Already Exists");
-            return false;
-        }
-
         if (!validateInputStudent(nameStudent, genderStudent, String.valueOf(codeMajor))){
             return false;
         }
@@ -160,15 +155,20 @@ public class CollegeStudentService {
             return false;
         }
 
+        if (getStudentByName(nameStudent) != null && getStudentByCodeMajor(Integer.parseInt(codeMajor)) != null){
+            message.setError("Data Is Already Exists");
+            return false;
+        }
+
         if (!nameStudent.matches("^[a-zA-Z -]*$") || !genderStudent.matches("^[a-zA-Z -]*$")){
             message.setError("Can only input the alphabet");
             return false;
         }
 
-//        if (!genderStudent.equalsIgnoreCase("Laki-Laki")||!genderStudent.equalsIgnoreCase("Perempuan")){
-//            message.setError("There only 2 Gender");
-//            return false;
-//        }
+        if (!(genderStudent.equalsIgnoreCase("Laki-Laki")|| genderStudent.equalsIgnoreCase("Perempuan"))){
+            message.setError("There only 2 Gender");
+            return false;
+        }
         return true;
     }
     public int generateId(){

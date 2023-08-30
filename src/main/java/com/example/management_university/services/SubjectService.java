@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class SubjectService {
     private List<SubjectModel> subjectDB;
-    private int id;
+//    private int id;
     private Response message = new Response();
 
     public SubjectService(){
@@ -26,10 +26,10 @@ public class SubjectService {
             return false;
         }
 
-        if (validateInputSubject(subject.getCredits(), name)){
+        if (!validateInputSubject(subject.getCredits(), name)){
             return false;
         }
-        SubjectModel dataSubject = new SubjectModel(generateId(), name, subject.getCredits());
+        SubjectModel dataSubject = new SubjectModel(subject.getIdSubject(), name, subject.getCredits());
         subjectDB.add(dataSubject);
         message.setResponse("Saved Subject Successfully", dataSubject);
         return true;
@@ -58,7 +58,6 @@ public class SubjectService {
     }
 
     public List<SubjectModel> viewSubjects(){
-        seedData();
         List<SubjectModel> subjectData = new ArrayList<>();
         for (SubjectModel subject : subjectDB){
             if (subject.getDeleteFalse()){
@@ -116,12 +115,13 @@ public class SubjectService {
             message.setError("Data Must Be Filled In");
             return false;
         }
+
         return true;
     }
 
-    public int generateId(){
-        id++;
-        return id;
-    }
+//    public int generateId(){
+//        id++;
+//        return id;
+//    }
 
 }

@@ -21,7 +21,6 @@ public class MajorController {
     @PostMapping("")
     public ResponseEntity saveMajor(@RequestBody MajorModel major){
         boolean added = majorService.addMajor(major);
-
         if (added){
             response = new ResponseModel(majorService.getMessage().responseMessage(), majorService.getMessage().responseObject());
             return ResponseEntity.status(HttpStatus.OK).body(response);

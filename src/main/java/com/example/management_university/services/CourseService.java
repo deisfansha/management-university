@@ -28,7 +28,7 @@ public class CourseService {
     }
     public boolean addCourse(CourseModel course){
         String npmStudent = course.getNpm().trim();
-        String codeSubject = course.getCodeSubject();
+        String codeSubject = course.getCodeSubject().trim();
 
         if (validateInputCourse(npmStudent, codeSubject)){
             return false;
@@ -36,8 +36,7 @@ public class CourseService {
 
         CollegeStudentModel existingNpmStudent = studentService.getStudentByNpm(npmStudent);
         SubjectModel existingIdSubject = subjectService.getSubjectById(Integer.parseInt(codeSubject));
-        System.out.println(existingNpmStudent);
-        System.out.println(existingIdSubject);
+
         if (existingNpmStudent == null){
             message.setError("Student Not Found");
             return false;
@@ -48,11 +47,10 @@ public class CourseService {
             return false;
         }
 
-        if (existingNpmStudent.getNpm().equalsIgnoreCase(npmStudent) && existingIdSubject.getIdSubject() == Integer.parseInt(codeSubject)){
+        if (getCourseByNpm(npmStudent) != null && getCourseBySubject(codeSubject) != null){
             message.setError("Data Is Already Exists");
             return false;
         }
-
 
         String idCourse = String.valueOf(generateId());
         CourseModel courseData = new CourseModel("00"+idCourse, npmStudent, codeSubject);
@@ -60,29 +58,6 @@ public class CourseService {
         message.setResponse("Add Course Successfully", courseData);
         return true;
     }
-
-//    public boolean updateCourse(int id, CourseModel course){
-//        String npmStudent = course.getNpm().trim();
-//        String codeSubject = course.getCodeSubject();
-//        CourseModel existingId = getCourseByid(String.valueOf(id));
-//        if (existingId == null){
-//            message.setError("Course Not Found");
-//            return false;
-//        }
-//
-//        if (!existingId.getNpm().equals(npmStudent) && !existingId.getCodeSubject().equalsIgnoreCase(course.getCodeSubject().trim())){
-//            if (!validateInputCourse(npmStudent, codeSubject)){
-//                return false;
-//            }
-//            existingId.setName(major.getName().trim());
-//            message.setResponse("Updated Successfully", existingId);
-//        }else {
-//            message.setError("No Changes Detected");
-//            return false;
-//        }
-//
-//        return true;
-//    }
 
     public boolean softDeleteMajor(String id){
         CourseModel existingId = getCourseByid(id);
@@ -105,17 +80,36 @@ public class CourseService {
         }
         return null;
     }
+
+    public CourseModel getCourseByNpm(String npm){
+        for (CourseModel course : courseDB){
+            if (course.getNpm().equalsIgnoreCase(npm) && !course.isDelete()){
+                return course;
+            }
+        }
+        return null;
+    }
+
+    public CourseModel getCourseBySubject(String codeSubject){
+        for (CourseModel course : courseDB){
+            if (course.getCodeSubject().equalsIgnoreCase(codeSubject) && !course.isDelete()){
+                return course;
+            }
+        }
+        return null;
+    }
+
     public List<CourseModel> viewAll(){
         List<CourseModel> courseView = new ArrayList<>();
         for (CourseModel course : courseDB){
-            if (course.isDelete() == false){
+            if (!course.isDelete()){
                 courseView.add(course);
             }
         }
         return courseView;
     }
 
-    public boolean validateInputCourse(String npm, String idSubject){
+    private boolean validateInputCourse(String npm, String idSubject){
         if (npm.isEmpty() || idSubject.isEmpty()){
             message.setError("Data Must Be Filled In");
             return false;
@@ -128,7 +122,7 @@ public class CourseService {
         return true;
     }
 
-    public int generateId(){
+    private int generateId(){
         id++;
         return id;
     }
