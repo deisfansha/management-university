@@ -111,7 +111,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"codeMajor\": \"11\",\r\n        \"name\": \"Deisfansha\",\r\n        \"gender\": \"Putra\"\r\n}",
+							"raw": "{\r\n        \"codeMajor\": \"12\",\r\n        \"name\": \"Deisfansha1\",\r\n        \"gender\": \"Putra\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,6 +216,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"codeCourse\": \"001\",\r\n        \"quiz\": {\r\n                    \"quiz1\": 90,\r\n                    \"quiz2\": 80,\r\n                    \"quiz3\": 80,\r\n                    \"quiz4\": 70,\r\n                    \"quiz5\": 70\r\n                },\r\n        \"exam\": {\r\n                    \"exam1\": 90,\r\n                    \"exam2\": 80\r\n                }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "http://localhost:8080/course-grades"
 					},
 					"response": []
@@ -225,7 +234,16 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
-						"url": "http://localhost:8080/course-grades/1"
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    \r\n        {\r\n            \"quiz\": {\r\n                \"quiz1\": 40,\r\n                \"quiz2\": 40,\r\n                \"quiz3\": 40,\r\n                \"quiz4\": 40,\r\n                \"quiz5\": 40\r\n            },\r\n            \"exam\": {\r\n                \"exam1\": 30,\r\n                \"exam2\": 30\r\n            }\r\n        }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/course-grades/2"
 					},
 					"response": []
 				},
